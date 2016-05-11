@@ -11,18 +11,21 @@ namespace WindowsFormsApplication2
     {
         protected int X;
         protected int Y;
+        protected Color C, CR;
         protected Pen pluma;
         protected int ancho, ancho2;
         protected int largo, largo2;
-        protected Color color;
+        //protected Color color;
         protected SolidBrush brocha;
 
-        public Figura(int x, int y) {
+        public Figura(int x, int y, Color c, Color cr) {
             X = x;
             Y = y;
-            
-            brocha = new SolidBrush(Color.LightCyan);
-            pluma = new Pen(Color.Black, 3);
+            C = c;
+            CR = cr;
+
+            brocha = new SolidBrush(CR);
+            pluma = new Pen (C, 3);
                 
             Random rnd = new Random();
             ancho = rnd.Next(10,60);
@@ -44,7 +47,7 @@ namespace WindowsFormsApplication2
     class Rectangulo:Figura
     {
         
-        public Rectangulo(int x, int y):base(x,y)
+        public Rectangulo(int x, int y, Color c, Color cr) :base(x,y,c,cr)
     	{
         } 
 
@@ -60,7 +63,7 @@ namespace WindowsFormsApplication2
     class Linea : Figura
     {
      
-        public Linea(int x, int y) : base(x, y)
+        public Linea(int x, int y, Color c,Color cr) : base(x, y, c,cr)
         {
           
         }
@@ -76,7 +79,7 @@ namespace WindowsFormsApplication2
 
     class Circulo : Figura
     {
-        public Circulo(int x, int y) : base(x, y)
+        public Circulo(int x, int y, Color c, Color cr) : base(x, y, c,cr)
         {
 
         }

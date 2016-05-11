@@ -17,16 +17,21 @@ namespace WindowsFormsApplication2
 
         private TipoFigura figura_actual; 
         private List<Figura> rectangulos;
-        public System.Drawing.Color color_contorno;
+        private Color color_contorno, color_relleno; 
+      
 
         public Form1()
         {
-      
+            
             figura_actual = TipoFigura.Circulo;
            
             rectangulos = new List<Figura>();
            
             InitializeComponent();
+
+            color_contorno = Color.Black;
+            color_relleno = Color.LightGreen;
+
             circuloToolStripMenuItem.Checked = true;
         }
 
@@ -41,20 +46,20 @@ namespace WindowsFormsApplication2
             {
                 if (figura_actual == TipoFigura.Circulo)
                     {
-                    Circulo c = new Circulo(e.X, e.Y);
+                    Circulo c = new Circulo(e.X, e.Y, color_contorno, color_relleno);
                     c.Draw(this);
                     rectangulos.Add(c);
                 }
                 else if (figura_actual == TipoFigura.Rectangulo)
                 {
-                    Rectangulo r = new Rectangulo(e.X, e.Y);
+                    Rectangulo r = new Rectangulo(e.X, e.Y, color_contorno, color_relleno);
                     r.Draw(this);
                     rectangulos.Add(r);
                 }
                 else if (figura_actual == TipoFigura.Linea)
                 {
         
-                    Linea l = new Linea(e.X, e.Y);
+                    Linea l = new Linea(e.X, e.Y, color_contorno,color_relleno);
                     l.Draw(this);
                     rectangulos.Add(l);
                 }
@@ -105,7 +110,15 @@ namespace WindowsFormsApplication2
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
-                color_contorno = colorDialog1.Color;
+                 color_contorno = colorDialog1.Color;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (colorDialog2.ShowDialog() == DialogResult.OK)
+            {
+                color_relleno = colorDialog2.Color;
             }
         }
     }

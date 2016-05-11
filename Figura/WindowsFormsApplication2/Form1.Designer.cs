@@ -34,10 +34,12 @@
             this.figuraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rectanguloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.circuloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ordenarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lineaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ordenarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.button2 = new System.Windows.Forms.Button();
+            this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,7 +55,7 @@
             // colorToolStripMenuItem
             // 
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            this.colorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.colorToolStripMenuItem.Text = "Color";
             // 
             // figuraToolStripMenuItem
@@ -63,36 +65,36 @@
             this.circuloToolStripMenuItem,
             this.lineaToolStripMenuItem});
             this.figuraToolStripMenuItem.Name = "figuraToolStripMenuItem";
-            this.figuraToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.figuraToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.figuraToolStripMenuItem.Text = "Figura";
             // 
             // rectanguloToolStripMenuItem
             // 
             this.rectanguloToolStripMenuItem.Name = "rectanguloToolStripMenuItem";
-            this.rectanguloToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rectanguloToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.rectanguloToolStripMenuItem.Text = "Rectangulo";
             this.rectanguloToolStripMenuItem.Click += new System.EventHandler(this.rectanguloToolStripMenuItem_Click);
             // 
             // circuloToolStripMenuItem
             // 
             this.circuloToolStripMenuItem.Name = "circuloToolStripMenuItem";
-            this.circuloToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.circuloToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.circuloToolStripMenuItem.Text = "Circulo";
             this.circuloToolStripMenuItem.Click += new System.EventHandler(this.circuloToolStripMenuItem_Click);
-            // 
-            // ordenarToolStripMenuItem
-            // 
-            this.ordenarToolStripMenuItem.Name = "ordenarToolStripMenuItem";
-            this.ordenarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.ordenarToolStripMenuItem.Text = "Ordenar";
-            this.ordenarToolStripMenuItem.Click += new System.EventHandler(this.ordenarToolStripMenuItem_Click);
             // 
             // lineaToolStripMenuItem
             // 
             this.lineaToolStripMenuItem.Name = "lineaToolStripMenuItem";
-            this.lineaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lineaToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.lineaToolStripMenuItem.Text = "Linea";
             this.lineaToolStripMenuItem.Click += new System.EventHandler(this.lineaToolStripMenuItem_Click);
+            // 
+            // ordenarToolStripMenuItem
+            // 
+            this.ordenarToolStripMenuItem.Name = "ordenarToolStripMenuItem";
+            this.ordenarToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.ordenarToolStripMenuItem.Text = "Ordenar";
+            this.ordenarToolStripMenuItem.Click += new System.EventHandler(this.ordenarToolStripMenuItem_Click);
             // 
             // button1
             // 
@@ -100,15 +102,26 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(103, 30);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Color Contorno";
+            this.button1.Text = "Color del contorno";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(423, 48);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(103, 30);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Color de relleno";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 317);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Form1";
@@ -131,6 +144,8 @@
         private System.Windows.Forms.ToolStripMenuItem lineaToolStripMenuItem;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ColorDialog colorDialog2;
     }
 }
 
