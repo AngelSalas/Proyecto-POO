@@ -16,3 +16,4 @@ C:\Users\Angel\Desktop\Proyecto-POO\Figura\WindowsFormsApplication2\obj\Debug\Wi
 C:\Users\Angel\Desktop\Proyecto-POO\Figura\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Form1.resources
 C:\Users\Angel\Desktop\Proyecto-POO\Figura\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Properties.Resources.resources
 C:\Users\Angel\Desktop\Proyecto-POO\Figura\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csproj.GenerateResource.Cache
+C:\Users\Angel\Desktop\Proyecto-POO\Figura\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Form2.resources

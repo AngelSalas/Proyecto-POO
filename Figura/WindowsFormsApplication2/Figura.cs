@@ -13,25 +13,32 @@ namespace WindowsFormsApplication2
         protected int Y;
         protected Color C, CR;
         protected Pen pluma;
-        protected int ancho, ancho2;
-        protected int largo, largo2;
-        //protected Color color;
+        protected int A;
+        protected int L;
+       // protected int ancho, ancho2;
+       // protected int largo, largo2;
+      
         protected SolidBrush brocha;
 
-        public Figura(int x, int y, Color c, Color cr) {
+        public Figura(int x, int y, Color c, Color cr, int a, int l) {
             X = x;
             Y = y;
             C = c;
             CR = cr;
+            A = a;
+       
+            L = l;
+         
 
+            
             brocha = new SolidBrush(CR);
-            pluma = new Pen (C, 3);
+            pluma = new Pen (C, 4);
                 
-            Random rnd = new Random();
-            ancho = rnd.Next(10,60);
-            largo = ancho;
-            ancho2 = rnd.Next(10,100);
-            largo2 = rnd.Next(10,100);
+          //  Random rnd = new Random();
+          //  ancho = rnd.Next(10,60);
+          //  largo = ancho;
+           // ancho2 = rnd.Next(10,100);
+            //largo2 = rnd.Next(10,100);
         }
 
         public abstract void Draw(Form f);
@@ -39,7 +46,7 @@ namespace WindowsFormsApplication2
         public int CompareTo(object obj)
         {
 
-            return this.largo.CompareTo(((Figura)obj).largo);
+            return this.L.CompareTo(((Figura)obj).L);
         }
     }
 
@@ -47,15 +54,15 @@ namespace WindowsFormsApplication2
     class Rectangulo:Figura
     {
         
-        public Rectangulo(int x, int y, Color c, Color cr) :base(x,y,c,cr)
+        public Rectangulo(int x, int y, Color c, Color cr, int a, int l) :base(x,y,c,cr,a,l)
     	{
         } 
 
         public override void Draw(Form f)
         {
             Graphics g = f.CreateGraphics();
-            g.DrawRectangle(pluma, this.X, this.Y, ancho, largo);
-            g.FillRectangle(brocha, this.X, this.Y, ancho, largo);
+            g.DrawRectangle(pluma, this.X, this.Y, A, L);
+            g.FillRectangle(brocha, this.X, this.Y, A, L);
         }
 
     }
@@ -63,7 +70,7 @@ namespace WindowsFormsApplication2
     class Linea : Figura
     {
      
-        public Linea(int x, int y, Color c,Color cr) : base(x, y, c,cr)
+        public Linea(int x, int y, Color c, Color cr, int a, int l) : base(x, y, c, cr, a, l)
         {
           
         }
@@ -71,7 +78,7 @@ namespace WindowsFormsApplication2
         public override void Draw(Form f)
         {
             Graphics g = f.CreateGraphics();
-            g.DrawLine(pluma, this.X, this.Y, ancho2, largo2);
+            g.DrawLine(pluma, this.X, this.Y, A, L);
            
         }
 
@@ -79,7 +86,7 @@ namespace WindowsFormsApplication2
 
     class Circulo : Figura
     {
-        public Circulo(int x, int y, Color c, Color cr) : base(x, y, c,cr)
+        public Circulo(int x, int y, Color c, Color cr, int a, int l) : base(x, y, c, cr, a, l)
         {
 
         }
@@ -87,9 +94,13 @@ namespace WindowsFormsApplication2
         public override void Draw(Form f)
         {
             Graphics g = f.CreateGraphics();
-            g.DrawEllipse(pluma, this.X, this.Y, ancho, largo);
-            g.FillEllipse(brocha, this.X, this.Y, ancho, largo);
+            g.DrawEllipse(pluma, this.X, this.Y, A, L);
+            g.FillEllipse(brocha, this.X, this.Y, A, L);
         }
+
+    
+
+        
 
     }
 

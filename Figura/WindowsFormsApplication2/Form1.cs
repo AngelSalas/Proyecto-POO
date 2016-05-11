@@ -13,12 +13,15 @@ namespace WindowsFormsApplication2
 
     public partial class Form1 : Form
     {
+        
         enum TipoFigura  {Rectangulo, Circulo, Linea};
 
         private TipoFigura figura_actual; 
         private List<Figura> rectangulos;
-        private Color color_contorno, color_relleno; 
-      
+        public int ancho;
+        public int largo;
+        private Color color_contorno, color_relleno;
+        Form2 FormaCaptura = new Form2();
 
         public Form1()
         {
@@ -31,12 +34,15 @@ namespace WindowsFormsApplication2
 
             color_contorno = Color.Black;
             color_relleno = Color.LightGreen;
+            largo = 40;
+            ancho = 40;
 
             circuloToolStripMenuItem.Checked = true;
         }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
+            
             if (MouseButtons.Right == e.Button)
             {
                 
@@ -46,23 +52,24 @@ namespace WindowsFormsApplication2
             {
                 if (figura_actual == TipoFigura.Circulo)
                     {
-                    Circulo c = new Circulo(e.X, e.Y, color_contorno, color_relleno);
+                    Circulo c = new Circulo(e.X, e.Y, color_contorno, color_relleno,ancho,largo);
                     c.Draw(this);
                     rectangulos.Add(c);
                 }
                 else if (figura_actual == TipoFigura.Rectangulo)
                 {
-                    Rectangulo r = new Rectangulo(e.X, e.Y, color_contorno, color_relleno);
+                    Rectangulo r = new Rectangulo(e.X, e.Y, color_contorno,color_relleno,ancho, largo);
                     r.Draw(this);
                     rectangulos.Add(r);
                 }
                 else if (figura_actual == TipoFigura.Linea)
                 {
         
-                    Linea l = new Linea(e.X, e.Y, color_contorno,color_relleno);
+                    Linea l = new Linea(e.X, e.Y, color_contorno,color_relleno,ancho, largo);
                     l.Draw(this);
                     rectangulos.Add(l);
                 }
+            
             }
    
         }
@@ -79,6 +86,7 @@ namespace WindowsFormsApplication2
             this.rectanguloToolStripMenuItem.Checked = true;
             this.circuloToolStripMenuItem.Checked = false;
             this.lineaToolStripMenuItem.Checked = false;
+            button3.Text = "Tamaño";
             figura_actual = TipoFigura.Rectangulo;
         }
 
@@ -87,6 +95,7 @@ namespace WindowsFormsApplication2
             this.circuloToolStripMenuItem.Checked = true;
             this.rectanguloToolStripMenuItem.Checked = false;
             this.lineaToolStripMenuItem.Checked = false;
+            button3.Text = "Tamaño";
             figura_actual = TipoFigura.Circulo;
         }
 
@@ -103,6 +112,7 @@ namespace WindowsFormsApplication2
             this.circuloToolStripMenuItem.Checked = false;
             this.rectanguloToolStripMenuItem.Checked = false;
             this.lineaToolStripMenuItem.Checked = true;
+            button3.Text = "Coordenadas";
             figura_actual = TipoFigura.Linea;
         }
 
@@ -112,6 +122,55 @@ namespace WindowsFormsApplication2
             {
                  color_contorno = colorDialog1.Color;
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (figura_actual == TipoFigura.Linea)
+            {
+                FormaCaptura.Text = "Coordenadas";
+                FormaCaptura.lblAncho.Text = "X:";
+                FormaCaptura.lblLargo.Text = "Y:";
+            }
+            else
+            {
+                FormaCaptura.Text = "Tamaño";
+                FormaCaptura.lblAncho.Text = "Ancho:";
+                FormaCaptura.lblLargo.Text = "Largo:";
+            }
+                if (FormaCaptura.ShowDialog() == DialogResult.OK)
+                {
+
+                    try
+                    {
+                        largo = int.Parse(FormaCaptura.txtLargo.Text);
+                        ancho = int.Parse(FormaCaptura.txtAncho.Text);
+
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Error, porfavor vuelve a llenar los campos");
+                        FormaCaptura.txtAncho.Clear();
+                        FormaCaptura.txtLargo.Clear();
+                        FormaCaptura.txtLargo.Focus();
+
+                    }
+                    FormaCaptura.txtAncho.Clear();
+                    FormaCaptura.txtLargo.Clear();
+                    FormaCaptura.txtLargo.Focus();
+                
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.rectangulos.Clear();
+            this.Refresh();
         }
 
         private void button2_Click(object sender, EventArgs e)
