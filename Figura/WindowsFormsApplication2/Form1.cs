@@ -14,14 +14,17 @@ namespace WindowsFormsApplication2
     public partial class Form1 : Form
     {
         
-        enum TipoFigura  {Rectangulo, Circulo, Linea};
+        enum TipoFigura  {Rectangulo, Circulo, Linea, Triangulo};
 
         private TipoFigura figura_actual; 
         private List<Figura> rectangulos;
         public int ancho;
         public int largo;
+        public int v1, v2, v3;
+        public int grosor;
         private Color color_contorno, color_relleno;
         Form2 FormaCaptura = new Form2();
+        Form3 FormaGrosor = new Form3();
 
         public Form1()
         {
@@ -36,6 +39,10 @@ namespace WindowsFormsApplication2
             color_relleno = Color.LightGreen;
             largo = 40;
             ancho = 40;
+            v1 = 20;
+            v2 = 20;
+            v3 = 20;
+            grosor = 4;
 
             circuloToolStripMenuItem.Checked = true;
         }
@@ -52,24 +59,32 @@ namespace WindowsFormsApplication2
             {
                 if (figura_actual == TipoFigura.Circulo)
                     {
-                    Circulo c = new Circulo(e.X, e.Y, color_contorno, color_relleno,ancho,largo);
+                    Circulo c = new Circulo(e.X, e.Y, color_contorno, color_relleno,ancho,largo,grosor);
                     c.Draw(this);
                     rectangulos.Add(c);
                 }
                 else if (figura_actual == TipoFigura.Rectangulo)
                 {
-                    Rectangulo r = new Rectangulo(e.X, e.Y, color_contorno,color_relleno,ancho, largo);
+                    Rectangulo r = new Rectangulo(e.X, e.Y, color_contorno,color_relleno,ancho, largo,grosor);
                     r.Draw(this);
                     rectangulos.Add(r);
                 }
                 else if (figura_actual == TipoFigura.Linea)
                 {
         
-                    Linea l = new Linea(e.X, e.Y, color_contorno,color_relleno,ancho, largo);
+                    Linea l = new Linea(e.X, e.Y, color_contorno,color_relleno,ancho, largo,grosor);
                     l.Draw(this);
                     rectangulos.Add(l);
                 }
-            
+                else if (figura_actual == TipoFigura.Triangulo)
+                {
+
+                    Triangulo t = new Triangulo(e.X, e.Y, color_contorno, color_relleno, ancho, largo,v1,v2,v3, grosor);
+                    t.Draw(this);
+                    rectangulos.Add(t);
+                    FormaCaptura.txtLargo.Focus();
+                }
+
             }
    
         }
@@ -86,7 +101,8 @@ namespace WindowsFormsApplication2
             this.rectanguloToolStripMenuItem.Checked = true;
             this.circuloToolStripMenuItem.Checked = false;
             this.lineaToolStripMenuItem.Checked = false;
-            button3.Text = "Tamaño";
+            this.trianguloToolStripMenuItem.Checked = false;
+            button3.Text = "&Tamaño";
             figura_actual = TipoFigura.Rectangulo;
         }
 
@@ -95,7 +111,8 @@ namespace WindowsFormsApplication2
             this.circuloToolStripMenuItem.Checked = true;
             this.rectanguloToolStripMenuItem.Checked = false;
             this.lineaToolStripMenuItem.Checked = false;
-            button3.Text = "Tamaño";
+            this.trianguloToolStripMenuItem.Checked = false;
+            button3.Text = "&Tamaño";
             figura_actual = TipoFigura.Circulo;
         }
 
@@ -103,6 +120,7 @@ namespace WindowsFormsApplication2
         {
             rectangulos.Sort();
             rectangulos.Reverse();
+            this.Refresh();
            
 
         }
@@ -112,7 +130,8 @@ namespace WindowsFormsApplication2
             this.circuloToolStripMenuItem.Checked = false;
             this.rectanguloToolStripMenuItem.Checked = false;
             this.lineaToolStripMenuItem.Checked = true;
-            button3.Text = "Coordenadas";
+            button3.Text = "C&oordenadas";
+            this.trianguloToolStripMenuItem.Checked = false;
             figura_actual = TipoFigura.Linea;
         }
 
@@ -126,18 +145,61 @@ namespace WindowsFormsApplication2
 
         private void button3_Click(object sender, EventArgs e)
         {
+            FormaCaptura.txtLargo.Focus();
             if (figura_actual == TipoFigura.Linea)
             {
                 FormaCaptura.Text = "Coordenadas";
                 FormaCaptura.lblAncho.Text = "X:";
                 FormaCaptura.lblLargo.Text = "Y:";
+                FormaCaptura.lblVertice3.Visible = false;
+                FormaCaptura.txtVertice3.Visible = false;
+            }
+            else if (figura_actual == TipoFigura.Triangulo)
+            {
+
+                FormaCaptura.Text = "Vertices";
+                FormaCaptura.lblAncho.Text = "Vertice 2:";
+                FormaCaptura.lblLargo.Text = "Vertice 1:";
+                FormaCaptura.lblVertice3.Visible = true;
+                FormaCaptura.txtVertice3.Visible = true;
             }
             else
             {
                 FormaCaptura.Text = "Tamaño";
                 FormaCaptura.lblAncho.Text = "Ancho:";
                 FormaCaptura.lblLargo.Text = "Largo:";
+                FormaCaptura.lblVertice3.Visible = false;
+                FormaCaptura.txtVertice3.Visible = false;
             }
+            if (figura_actual == TipoFigura.Triangulo)
+            {
+                if (FormaCaptura.ShowDialog() == DialogResult.OK)
+                {
+
+                    try
+                    {
+                        v1 = int.Parse(FormaCaptura.txtLargo.Text);
+                        v2 = int.Parse(FormaCaptura.txtAncho.Text);
+                        v3 = int.Parse(FormaCaptura.txtVertice3.Text);
+
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Error, porfavor vuelve a llenar los campos");
+                        FormaCaptura.txtAncho.Clear();
+                        FormaCaptura.txtVertice3.Clear();
+                        FormaCaptura.txtLargo.Clear();
+                        FormaCaptura.txtLargo.Focus();
+
+                    }
+                    FormaCaptura.txtAncho.Clear();
+                    FormaCaptura.txtLargo.Clear();
+                    FormaCaptura.txtVertice3.Clear();
+
+                }
+            }
+            else
+            {
                 if (FormaCaptura.ShowDialog() == DialogResult.OK)
                 {
 
@@ -157,8 +219,38 @@ namespace WindowsFormsApplication2
                     }
                     FormaCaptura.txtAncho.Clear();
                     FormaCaptura.txtLargo.Clear();
-                    FormaCaptura.txtLargo.Focus();
-                
+                    FormaCaptura.txtVertice3.Clear();
+             
+
+                }
+            }
+        }
+
+        private void trianguloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.circuloToolStripMenuItem.Checked = false;
+            this.rectanguloToolStripMenuItem.Checked = false;
+            this.lineaToolStripMenuItem.Checked = false;
+            this.trianguloToolStripMenuItem.Checked = true;
+            button3.Text = "&Vertices";
+            figura_actual = TipoFigura.Triangulo;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (FormaGrosor.ShowDialog() == DialogResult.OK)
+            {
+
+                try
+                {
+                    grosor = int.Parse(FormaGrosor.txtGrosor.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error, porfavor vuelve a llenar los campos");
+                    FormaGrosor.txtGrosor.Clear();
+                }
+                    FormaGrosor.txtGrosor.Clear();
             }
         }
 
